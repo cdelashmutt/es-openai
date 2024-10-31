@@ -108,6 +108,10 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
+    return {"status": "OK"}
+
+@app.get("/generate")
+async def generate():
     question = "What are the methods of the Region class in the Foundry VTT version 12 API?"
     elasticsearch_results = get_elasticsearch_results(question)
     context_prompt = create_openai_prompt(elasticsearch_results)
