@@ -4,7 +4,8 @@ import os
 from elasticsearch import Elasticsearch
 from openai import OpenAI
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, Security
+from utils import VerifyToken
 
 es_client = Elasticsearch(
     f"https://{os.environ["ES_HOST"]}",
@@ -105,13 +106,14 @@ def generate_openai_completion(user_prompt, question):
     return response
 
 app = FastAPI()
+auth = VerifyToken()
 
 @app.get("/")
 async def root():
     return {"status": "OK"}
 
 @app.get("/generate")
-async def generate():
+async def generate(auth_result: str = Security(auth.verify)):
     question = "What are the methods of the Region class in the Foundry VTT version 12 API?"
     elasticsearch_results = get_elasticsearch_results(question)
     context_prompt = create_openai_prompt(elasticsearch_results)

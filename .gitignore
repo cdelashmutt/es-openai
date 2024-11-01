@@ -1,3 +1,5 @@
+# Environment settings
+.env
 .envrc
 
 # Byte-compiled / optimized files

@@ -10,15 +10,15 @@
   </div>
 </template>
 <script setup>
-  import { useAuth0 } from '@auth0/auth0-vue';
+  import { useAuth0, Auth0VueClient } from '@auth0/auth0-vue';
   import User from './components/User.vue';
-  const { loginWithRedirect, logout, user, isAuthenticated, isLoading } = useAuth0();
+  const auth0Client = useAuth0();
 
   const doLogin = () => { 
-    loginWithRedirect();
+    auth0 = loginWithRedirect();
   };
   const doLogout = () => { 
-    logout({ logoutParams: { returnTo: window.location.origin } });
+    auth0 = logout({ logoutParams: { returnTo: window.location.origin } });
   }
 </script>
 <style>
