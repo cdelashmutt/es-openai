@@ -1,11 +1,14 @@
 <template>
   <div class="user-image">
-    <div class="user-image-frame"><img :src="user.picture" /></div>
-    <div class="name">{{ user.name }}</div>
+    <div class="user-image-frame"><img :src="user?.picture" /></div>
+    <div class="name">{{ user?.name }}</div>
   </div>
 </template>
 <script setup lang="ts">
-defineProps<{user?: object}>();
+import {User as Auth0User} from '@auth0/auth0-spa-js';
+defineProps<{
+  user?: Auth0User
+}>();
 
 </script>
 <style>

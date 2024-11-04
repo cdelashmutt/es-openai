@@ -9,16 +9,16 @@
     </div>
   </div>
 </template>
-<script setup>
-  import { useAuth0, Auth0VueClient } from '@auth0/auth0-vue';
+<script setup lang="ts">
+  import { useAuth0 } from '@auth0/auth0-vue';
   import User from './components/User.vue';
-  const auth0Client = useAuth0();
+  const { loginWithRedirect, logout, user, isAuthenticated, isLoading } = useAuth0();
 
   const doLogin = () => { 
-    auth0 = loginWithRedirect();
+    loginWithRedirect();
   };
   const doLogout = () => { 
-    auth0 = logout({ logoutParams: { returnTo: window.location.origin } });
+    logout({ logoutParams: { returnTo: window.location.origin } });
   }
 </script>
 <style>
