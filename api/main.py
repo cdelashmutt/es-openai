@@ -7,13 +7,15 @@ import uvicorn
 from fastapi import FastAPI, Security
 from utils import VerifyToken
 
+from config import get_settings
+
 es_client = Elasticsearch(
-    f"https://{os.environ["ES_HOST"]}",
-    api_key=os.environ["ES_API_KEY"]
+    f"https://{self.config.es_host}",
+    api_key=self.config.es_api_key
 )
       
 openai_client = OpenAI(
-    api_key=os.environ["OPENAI_API_KEY"],
+    api_key=self.config.openai_api_key,
 )
 index_source_fields = {
     "search-foundry-vtt": [
